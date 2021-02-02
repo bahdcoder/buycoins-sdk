@@ -1,0 +1,55 @@
+{
+  "scripts": {
+    "test": "jest",
+    "build": "yarn clean && tsc --p tsconfig.json",
+    "clean": "rimraf build/",
+    "prettier": "prettier --write './**/*.ts'",
+    "commit": "npx git-cz"
+  },
+  "name": "@buycoins/sdk",
+  "version": "0.0.1",
+  "description": "Sdk for the buycoins GraphQL API",
+  "main": "build/index.js",
+  "keywords": [
+    "buycoins",
+    "bitcoin",
+    "ethereum",
+    "usdc",
+    "graphql"
+  ],
+  "repository": "https://github.com/bahdcoder/buycoins",
+  "author": "Kati Frantz",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/glob": "^7.1.3",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "babel-jest": "^26.6.3",
+    "commitizen": "^4.2.3",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "glob": "^7.1.6",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.0",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.1.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
