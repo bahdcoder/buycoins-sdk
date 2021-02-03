@@ -3,8 +3,8 @@ import balances from './balances/balances'
 import bankAccounts from './bank-accounts/bank-accounts'
 
 class Buycoins {
-  private key: string | undefined = process.env.BUYCOINS_API_KEY
-  private secret: string | undefined = process.env.BUYCOINS_API_SECRET
+  private key: string | undefined = process.env.BUYCOINS_PUBLIC_KEY
+  private secret: string | undefined = process.env.BUYCOINS_SECRET_KEY
 
   constructor(key?: string, secret?: string) {
     this.key = key
