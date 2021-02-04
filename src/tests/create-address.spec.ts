@@ -15,6 +15,8 @@ describe('<.createAddress()>', () => {
 
     await createAddress().ethereum().post()
 
-    expect(getQuery()).toBe('mutation{createAddress(cryptocurrency:ethereum){id,address,createdAt,cryptocurrency}}')
+    expect(getQuery()).toBe(
+      'mutation{createAddress(cryptocurrency:ethereum){id,address,createdAt,cryptocurrency}}'
+    )
   })
 })

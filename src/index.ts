@@ -1,6 +1,7 @@
 import prices from './prices/prices'
 import balances from './balances/balances'
 import bankAccounts from './bank-accounts/bank-accounts'
+import estimatedNetworkFee from './estimated-network-fee/estimated-network-fee'
 
 class Buycoins {
   private key: string | undefined = process.env.BUYCOINS_PUBLIC_KEY
@@ -30,6 +31,13 @@ class Buycoins {
    */
   balances(): ReturnType<typeof balances> {
     return balances(this.key, this.secret)
+  }
+
+  /**
+   * Retrieve the estimated network fee for currencies or a single currency
+   */
+  estimatedNetworkFee(): ReturnType<typeof estimatedNetworkFee> {
+    return estimatedNetworkFee(this.key, this.secret)
   }
 }
 

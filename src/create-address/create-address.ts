@@ -12,11 +12,13 @@ import {
 
 interface CreateAddress extends FilterableByCryptocurrencyInterface {}
 
-class CreateAddress extends Query<
-  CreateAddressFields,
-  CreateAddressVariables
-> {
-  public static fields: CreateAddressFields[] = ['id', 'address', 'createdAt', 'cryptocurrency']
+class CreateAddress extends Query<CreateAddressFields, CreateAddressVariables> {
+  public static fields: CreateAddressFields[] = [
+    'id',
+    'address',
+    'createdAt',
+    'cryptocurrency',
+  ]
 
   constructor(key?: string, secret?: string) {
     super(key, secret)

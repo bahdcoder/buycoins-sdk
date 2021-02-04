@@ -55,9 +55,13 @@
 - [Quickstart](#quickstart)
 - [Queries](#queries)
     - [Get balances](#get-balances)
-        - [Single currency](#single-currency)
+        - [Balance for a single currency](#balance-for-a-single-currency)
     - [Get bank accounts](#get-bank-accounts)
+        - [Filter by bank account number](#filter-by-bank-account-number)
     - [Get estimated network fee](#get-estimated-network-fee)
+        - [Network fee for a single currency](#network-fee-for-a-single-currency)
+    - [Get buy and sell prices](#get-buy-and-sell-prices)
+        - [Price for a single currency](#price-for-a-single-currency)
 - [Mutations](#mutations)
     - [Create cryptocurrency addresses](#create-cryptocurrency-addresses)
 
@@ -127,18 +131,75 @@ api.prices().get().then(({ data }) => {
 })
 ```
 
-# Queries
-## Get balances
+## Queries
+### Get balances
 This query may be used to access your currency balances. You may use the `.balances()` method on the api instance to get the balances query:
 
 ```js
-const { data } = await buycoins()
-    .balances()
-    .get()
+const { data } = await buycoins().balances().get()
 ```
 
-### Single currency
-You may get the balance for a single currency by calling one of the following methods on the balances query instance:
+#### Balance for a single currency
+To get the balance for a single currency, you may call any of the [supported currency methods](#supported-currency-methods) on the query instance:
+
+```js
+const { data } = await buycoins().balances().bitcoin().get()
+```
+
+### Get bank accounts
+This query may be used to get all bank accounts attached to the connected Buycoins account. You may call the `.bankAccounts()` method on the api instance to get the bank accounts query:
+
+```js
+const { data } = await buycoins().bankAccounts().get()
+```
+
+#### Filter by bank account number
+You may filter the bank accounts returned using the `.accountNumber()` method:
+
+```js
+const { data } = await buycoins().bankAccounts().accountNumber('0243911239').get()
+```
+
+### Get estimated network fee
+You may retrieve the estimated network fee to send supported cryptocurrencies using the `.estimatedNetworkFee()` method. You also need to specify which currency you are interested in, and the amount of coins you want to transfer:
+
+```js
+const { data } = await buycoins().amount(0.0213).ethereum().estimatedNetworkFee().get()
+```
+
+You may use any of the [supported currency methods](#supported-currency-methods) to get the estimated network fee for a single currency.
+
+### Get buy and sell prices
+You may get the buy and sell prices of the supported currencies using the `.prices()` method. The `.buy()` and `.sell()` methods on this query can be used to get the buy prices and the sell prices respectively.
+
+```js
+const { data } = await buycoins().prices().sell().get()
+```
+
+#### Price for a single currency
+To get the price for a specific currency, use any of the [supported currency methods](#supported-currency-methods) on the query instance.
+
+```js
+const { data } = await buycoins().prices().sell().litecoin().get()
+```
+
+## Mutations
+
+### Create cryptocurrency addresses
+To receive supported cryptocurrencies, you may create new addresses using the `.createAddress()` mutation:
+
+```js
+const { data } = await buycoins().createAddress().post()
+```
+
+If no currency is specified, this mutation will create a bitcoin address. To specify a currency, you may use any of the [supported currency methods](#supported-currency-methods):
+
+```js
+const { data } = await buycoins().createAddress().litecoin().post()
+```
+
+## Supported currency methods
+These methods may be used to set or filter some queries or mutations by a specific currency.
 
 - `.bitcoin()`
 - `.litecoin()`
@@ -146,22 +207,6 @@ You may get the balance for a single currency by calling one of the following me
 - `.usdCoin()`
 - `.ethereum()`
 - `.nairaToken()`
-
-```js
-const { data } = await buycoins()
-    .balances()
-    .bitcoin()
-    .get()
-```
-
-## Get bank accounts
-This query may be used to get all bank accounts attached to the connected Buycoins account. You may call the `.bankAccounts()` method on the api instance to get the bank accounts query:
-
-```js
-const { data } = await buycoins()
-    .bankAccounts()
-    .get()
-```
 
 [github-actions-image]: https://img.shields.io/github/workflow/status/bahdcoder/buycoins-sdk/Tests%20&%20code%20coverage?style=for-the-badge
 [github-actions-url]: https://github.com/bahdcoder/buycoins-sdk/actions "github-actions"
