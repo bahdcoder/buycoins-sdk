@@ -7,6 +7,8 @@ export type EstimatedNetworkFeeFields = Partial<
 >
 
 export interface EstimatedNetworkFeeVariables {
-  cryptocurrency?: keyof typeof Currencies
-  amount: BigDecimal
+  root: {
+    cryptocurrency?: keyof typeof Currencies
+    amount: BigDecimal
+  }
 }

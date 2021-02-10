@@ -2,6 +2,7 @@
   "scripts": {
     "test": "jest",
     "build": "yarn clean && tsc --p tsconfig.json",
+    "dev": "yarn clean && tsc --p tsconfig.json --watch",
     "clean": "rimraf build/",
     "prettier": "prettier --write './**/*.ts'",
     "commit": "npx git-cz"

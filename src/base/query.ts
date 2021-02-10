@@ -3,7 +3,9 @@ import { QueryOptions } from './query.interface'
 class Query<FieldInterface = any, VariablesMapInterface = {}> {
   protected baseOptions: QueryOptions<FieldInterface, VariablesMapInterface> = {
     fields: [],
-    variables: {} as any,
+    variables: {
+      root: {},
+    } as any,
     credentials: {
       key: '',
       secret: '',

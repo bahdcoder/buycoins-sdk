@@ -1,5 +1,6 @@
 import Query from '../base/query'
 import request from '../api/request'
+import { Currencies } from '../types'
 import { applyMixins } from '../helpers/apply-mixins'
 import {
   CreateAddressVariables,
@@ -19,6 +20,12 @@ class CreateAddress extends Query<CreateAddressFields, CreateAddressVariables> {
     'createdAt',
     'cryptocurrency',
   ]
+
+  public static variables: CreateAddressVariables = {
+    root: {
+      cryptocurrency: Currencies.bitcoin,
+    },
+  }
 
   constructor(key?: string, secret?: string) {
     super(key, secret)

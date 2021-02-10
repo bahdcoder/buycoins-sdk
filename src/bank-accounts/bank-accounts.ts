@@ -31,7 +31,7 @@ class BankAccounts extends Query<BankAccountsFields, BankAccountsVariables> {
    * @return BankAccounts
    */
   public accountNumber(accountNumber: BankAccount['accountNumber']) {
-    this.baseOptions.variables.accountNumber = accountNumber
+    this.baseOptions.variables.root.accountNumber = accountNumber
 
     return this
   }

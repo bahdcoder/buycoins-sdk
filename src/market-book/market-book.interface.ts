@@ -1,10 +1,4 @@
-import { BigDecimal, Currencies, ID, Side } from '../types'
-
-export interface MarketBookFieldsInterface {
-  id: ID
-  dynamicPriceExpiry: Number
-  orders: {}
-}
+import { BigDecimal, Currencies } from '../types'
 
 export type MarketBookFields =
   | 'id'

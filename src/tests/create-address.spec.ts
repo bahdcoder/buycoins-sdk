@@ -7,7 +7,7 @@ const mockRequest = (request as unknown) as jest.Mock
 
 jest.mock('https')
 
-describe('<.createAddress()>', () => {
+describe('<createAddress>', () => {
   it('creates an ethereum address', async () => {
     const [getQuery, write] = useWriteMock()
 

@@ -9,17 +9,19 @@ export interface FilterableBySideInterface {
 export class FilterableBySide extends Query<
   {},
   {
-    side: keyof typeof Side
+    root: {
+      side: keyof typeof Side
+    }
   }
 > {
   buy() {
-    this.baseOptions.variables.side = Side.buy
+    this.baseOptions.variables.root.side = Side.buy
 
     return this
   }
 
   sell() {
-    this.baseOptions.variables.side = Side.sell
+    this.baseOptions.variables.root.side = Side.sell
 
     return this
   }

@@ -33,7 +33,7 @@ describe('<getBankAccounts>', () => {
       .get()
 
     expect(getQuery()).toBe(
-      `query{getBankAccounts(accountNumber:${TEST_ACCOUNT_NUMBER}){accountName,accountNumber}}`
+      `query{getBankAccounts(accountNumber:\\\"TEST_ACCOUNT_NUMBER\\\"){accountName,accountNumber}}`
     )
   })
 })

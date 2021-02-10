@@ -13,7 +13,7 @@ export interface PricesFieldsInterface {
   minSell: BigDecimal
   minBuy: BigDecimal
   maxBuy: BigDecimal
-  status: PriceStatus
+  status: keyof typeof PriceStatus
   sellPricePerCoin: BigDecimal
   minCoinAmount: BigDecimal
   cryptocurrency: keyof typeof Currencies

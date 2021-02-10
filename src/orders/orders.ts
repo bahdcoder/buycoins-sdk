@@ -1,23 +1,37 @@
-import { BigDecimal } from '../types'
 import Query from '../base/query'
 import request from '../api/request'
+import { Currencies, Status } from '../types'
 import { applyMixins } from '../helpers/apply-mixins'
 import {
   FilterableByCryptocurrency,
   FilterableByCryptocurrencyInterface,
 } from '../helpers/filterable-by-currency'
-import { MarketBookFields, MarketBookVariables } from './market-book.interface'
+import {
+  FilterableBySide,
+  FilterableBySideInterface,
+} from '../helpers/filterable-by-side'
+import {
+  FilterableByStatus,
+  FilterableByStatusInterface,
+} from '../helpers/filterable-by-status'
 
-interface MarketBook extends FilterableByCryptocurrencyInterface {}
+import { OrdersFields, OrdersVariables } from './orders.interface'
 
-class MarketBook extends Query<MarketBookFields, MarketBookVariables> {
-  public static variables: MarketBookVariables = {
+interface Orders
+  extends FilterableByCryptocurrencyInterface,
+    FilterableBySideInterface,
+    FilterableByStatusInterface {}
+
+class Orders extends Query<OrdersFields, OrdersVariables> {
+  public static variables: OrdersVariables = {
     root: {
+      cryptocurrency: Currencies.bitcoin,
+      status: Status.open,
       orders: {},
     },
   }
 
-  public static fields: MarketBookFields[] = [
+  public static fields: OrdersFields[] = [
     'id',
     'dynamicPriceExpiry',
     {
@@ -48,19 +62,8 @@ class MarketBook extends Query<MarketBookFields, MarketBookVariables> {
   constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
-    super.fields(MarketBook.fields)
-    super.variables(MarketBook.variables)
-  }
-
-  /**
-   * Define the amount for
-   *
-   * @param amount
-   */
-  public amount(amount: BigDecimal) {
-    this.baseOptions.variables.root.coinAmount = amount
-
-    return this
+    super.fields(Orders.fields)
+    super.variables(Orders.variables)
   }
 
   /**
@@ -71,24 +74,27 @@ class MarketBook extends Query<MarketBookFields, MarketBookVariables> {
    */
   public async get() {
     return request<
-      MarketBookFields,
-      MarketBookVariables,
+      OrdersFields,
+      OrdersVariables,
       {
         data: {
-          getMarketBook: MarketBookFields
+          getOrders: OrdersFields
         }
       }
     >(this.key, this.secret)
       .fields(this.baseOptions.fields)
-      .query('getMarketBook')
+      .query('getOrders')
       .variables(this.baseOptions.variables)
       .post()
   }
 }
 
-applyMixins(MarketBook, [FilterableByCryptocurrency])
+applyMixins(Orders, [
+  FilterableByCryptocurrency,
+  FilterableBySide,
+  FilterableByStatus,
+])
 
-const marketBook = (key?: string, secret?: string) =>
-  new MarketBook(key, secret)
+const orders = (key?: string, secret?: string) => new Orders(key, secret)
 
-export default marketBook
+export default orders

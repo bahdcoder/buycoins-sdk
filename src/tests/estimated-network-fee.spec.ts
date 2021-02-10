@@ -1,5 +1,4 @@
 import { request } from 'https'
-import { Currencies } from '../types'
 import estimatedNetworkFee from '../estimated-network-fee/estimated-network-fee'
 import { useWriteMock, requestMock } from './helpers'
 
@@ -17,7 +16,7 @@ describe('<getEstimatedNetworkFee>', () => {
     await estimatedNetworkFee().amount(TEST_AMOUNT).get()
 
     expect(getQuery()).toBe(
-      `query{getEstimatedNetworkFee(amount:${TEST_AMOUNT}){estimatedFee,total}}`
+      `query{getEstimatedNetworkFee(amount:\\\"0.002\\\"){estimatedFee,total}}`
     )
   })
 
@@ -30,7 +29,7 @@ describe('<getEstimatedNetworkFee>', () => {
     await estimatedNetworkFee().litecoin().amount(TEST_AMOUNT).get()
 
     expect(getQuery()).toBe(
-      `query{getEstimatedNetworkFee(cryptocurrency:${Currencies.litecoin},amount:${TEST_AMOUNT}){estimatedFee,total}}`
+      `query{getEstimatedNetworkFee(cryptocurrency:litecoin,amount:\\\"0.002\\\"){estimatedFee,total}}`
     )
   })
 })

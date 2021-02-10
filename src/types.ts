@@ -9,13 +9,25 @@ export enum Currencies {
 
 export type ID = string
 
+export type Int = number
+
 export type BigDecimal = string
 
 export type BigDecimalApprox = string
 
+export type Cursor = string
+
 export type UnixTimestamp = number
 
-export type PriceStatus = 'active' | 'expired'
+export enum Status {
+  open = 'open',
+  completed = 'completed',
+}
+
+export enum PriceStatus {
+  expired = 'expired',
+  active = 'active',
+}
 
 export enum Side {
   buy = 'buy',
@@ -27,6 +39,31 @@ export interface Account {
   confirmedBalance: BigDecimalApprox
   cryptocurrency: keyof typeof Currencies
 }
+
+export enum PaymentStatus {
+  success = 'success',
+  pending = 'pending',
+  failed = 'failed',
+  retried = 'retried',
+  initiated = 'initiated',
+  ready_for_processing = 'ready_for_processing',
+  canceled = 'canceled',
+  flagged = 'flagged',
+  returned = 'returned',
+}
+
+export interface Payment {
+  amount: BigDecimalApprox
+  createdAt: Int
+  fee: BigDecimalApprox
+  id: ID
+  reference: String
+  status: keyof typeof PaymentStatus
+  totalAmount: BigDecimalApprox
+  type: PaymentTypes
+}
+
+export type PaymentTypes = keyof typeof BankAccountType
 
 export enum BankAccountType {
   deposit = 'deposit',
@@ -45,6 +82,31 @@ export interface Address {
   cryptocurrency: keyof typeof Currencies
 }
 
+export interface Price {
+  buyPricePerCoin: BigDecimal
+  cryptocurrency: keyof typeof Currencies
+  expiresAt: UnixTimestamp
+  id: ID
+  maxBuy: BigDecimal
+  maxSell: BigDecimal
+  minBuy: BigDecimal
+  minCoinAmount: BigDecimalApprox
+  minSell: BigDecimal
+  sellPricePerCoin: BigDecimal
+  status: keyof typeof PriceStatus
+}
+
+export interface Order {
+  id: ID
+  createdAt: UnixTimestamp
+  cryptocurrency: keyof typeof Currencies
+  filledCoinAmount: BigDecimalApprox
+  price: Price
+  side: keyof typeof Side
+  status: keyof typeof Status
+  totalCoinAmount: BigDecimalApprox
+}
+
 export interface BankAccount {
   id: ID
   bankName: string
@@ -60,8 +122,7 @@ export interface GraphqlError {
   path: any[]
 }
 
-export interface GraphQlResponse<ShapeOfData = any> {
-  data: ShapeOfData
+export interface GraphQlResponse {
   errors: GraphqlError[]
 }
 

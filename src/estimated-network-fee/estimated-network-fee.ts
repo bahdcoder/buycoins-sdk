@@ -30,7 +30,7 @@ class EstimatedNetworkFee extends Query<
    * @param amount
    */
   public amount(amount: string) {
-    this.baseOptions.variables.amount = amount
+    this.baseOptions.variables.root.amount = amount
 
     return this
   }

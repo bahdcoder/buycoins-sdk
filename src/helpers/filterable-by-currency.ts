@@ -13,7 +13,9 @@ export interface FilterableByCryptocurrencyInterface {
 export class FilterableByCryptocurrency extends Query<
   {},
   {
-    cryptocurrency: keyof typeof Currencies
+    root: {
+      cryptocurrency: keyof typeof Currencies
+    }
   }
 > {
   /**
@@ -22,7 +24,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public bitcoin() {
-    this.baseOptions.variables.cryptocurrency = Currencies.bitcoin
+    this.baseOptions.variables.root.cryptocurrency = Currencies.bitcoin
 
     return this
   }
@@ -33,7 +35,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public usdTether() {
-    this.baseOptions.variables.cryptocurrency = Currencies.usd_tether
+    this.baseOptions.variables.root.cryptocurrency = Currencies.usd_tether
 
     return this
   }
@@ -44,7 +46,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public nairaToken() {
-    this.baseOptions.variables.cryptocurrency = Currencies.naira_token
+    this.baseOptions.variables.root.cryptocurrency = Currencies.naira_token
 
     return this
   }
@@ -55,7 +57,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public ethereum() {
-    this.baseOptions.variables.cryptocurrency = Currencies.ethereum
+    this.baseOptions.variables.root.cryptocurrency = Currencies.ethereum
 
     return this
   }
@@ -66,7 +68,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public litecoin() {
-    this.baseOptions.variables.cryptocurrency = Currencies.litecoin
+    this.baseOptions.variables.root.cryptocurrency = Currencies.litecoin
 
     return this
   }
@@ -77,7 +79,7 @@ export class FilterableByCryptocurrency extends Query<
    * @returns Balances
    */
   public usdCoin() {
-    this.baseOptions.variables.cryptocurrency = Currencies.usd_coin
+    this.baseOptions.variables.root.cryptocurrency = Currencies.usd_coin
 
     return this
   }

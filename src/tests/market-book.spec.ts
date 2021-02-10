@@ -16,7 +16,7 @@ describe('<marketBook>', () => {
     await marketBook().amount(TEST_AMOUNT).get()
 
     expect(getQuery()).toBe(
-      `query{getMarketBook(coinAmount:${TEST_AMOUNT}){id,dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
+      `query{getMarketBook(coinAmount:\\\"TEST_AMOUNT\\\"){id,dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
     )
   })
 
@@ -56,7 +56,7 @@ describe('<marketBook>', () => {
       .get()
 
     expect(getQuery()).toBe(
-      `query{getMarketBook(coinAmount:${TEST_AMOUNT},cryptocurrency:bitcoin){id,orders(after:${TEST_ORDER_AFTER},before:${TEST_ORDER_BEFORE}){edges{cursor,node{id,coinAmount,createdAt,cryptocurrency}}}}}`
+      `query{getMarketBook(coinAmount:\\\"TEST_AMOUNT\\\",cryptocurrency:bitcoin){id,orders(after:\\\"TEST_ORDER_AFTER\\\",before:\\\"TEST_ORDER_BEFORE\\\"){edges{cursor,node{id,coinAmount,createdAt,cryptocurrency}}}}}`
     )
   })
 })

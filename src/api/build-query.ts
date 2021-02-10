@@ -9,9 +9,17 @@ class QueryBuilder {
     private mutation?: boolean
   ) {}
 
-  getVariables(
-    variablesMap = this.variables.root ? this.variables.root : this.variables
-  ) {
+  private enumVariables = ['cryptocurrency', 'side', 'status', 'orderStatus']
+
+  private getVariableValue(variable: { key: string; value: string }) {
+    if (this.enumVariables.includes(variable.key)) {
+      return `${variable.key}:${variable.value}`
+    }
+
+    return `${variable.key}:"${variable.value}"`
+  }
+
+  getVariables(variablesMap = this.variables.root) {
     const variablesList = Object.keys(variablesMap).map((key) => ({
       key,
       value: variablesMap[key],
@@ -24,7 +32,7 @@ class QueryBuilder {
     return `(${variablesList
       .filter((variable) => typeof variable.value === 'string')
       .map((variable, index) => {
-        return `${variable.key}:${variable.value}${
+        return `${this.getVariableValue(variable)}${
           index === variablesList.length - 1 ? '' : ''
         }`
       })})`
