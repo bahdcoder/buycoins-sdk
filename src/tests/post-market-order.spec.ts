@@ -21,16 +21,16 @@ describe('<postMarketOrder>', () => {
     )
   })
 
-  it('posts a sell market litecoin order', async () => {
+  it('posts a buy market litecoin order', async () => {
     const TEST_AMOUNT = '0.002'
     const [getQuery, write] = useWriteMock()
 
     mockRequest.mockImplementation(requestMock(write))
 
-    await postMarketOrder().amount(TEST_AMOUNT).sell().litecoin().post()
+    await postMarketOrder().amount(TEST_AMOUNT).buy().litecoin().post()
 
     expect(getQuery()).toBe(
-      `mutation{postMarketOrder(coinAmount:\\\"0.002\\\",orderSide:sell,cryptocurrency:litecoin){id,side,side,status,priceType,createdAt,coinAmount,staticPrice,pricePerCoin,cryptocurrency,dynamicExchangeRate}}`
+      `mutation{postMarketOrder(coinAmount:\\\"0.002\\\",orderSide:buy,cryptocurrency:litecoin){id,side,side,status,priceType,createdAt,coinAmount,staticPrice,pricePerCoin,cryptocurrency,dynamicExchangeRate}}`
     )
   })
 })

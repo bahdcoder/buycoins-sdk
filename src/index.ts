@@ -12,6 +12,8 @@ import sell from './sell/sell'
 import send from './send/send'
 import sendOffchain from './send-offchain/send-offchain'
 import createAddress from './create-address/create-address'
+import postLimitOrder from './post-limit-order/post-limit-order'
+import postMarketOrder from './post-market-order/post-market-order'
 import cancelWithdrawal from './cancel-withdrawal/cancel-withdrawal'
 
 class Buycoins {
@@ -98,6 +100,20 @@ class Buycoins {
    */
   cancelWithdrawal(): ReturnType<typeof cancelWithdrawal> {
     return cancelWithdrawal(this.key, this.secret)
+  }
+
+  /**
+   * Post a market order
+   */
+  postMarketOrder(): ReturnType<typeof postMarketOrder> {
+    return postMarketOrder(this.key, this.secret)
+  }
+
+  /**
+   * Post a limit order
+   */
+  postLimitOrder(): ReturnType<typeof postLimitOrder> {
+    return postLimitOrder(this.key, this.secret)
   }
 
   /**

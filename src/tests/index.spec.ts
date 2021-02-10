@@ -142,6 +142,30 @@ describe('@buycoins/sdk', () => {
     ).resolves.toEqual(TEST_RESPONSE)
   })
 
+  it('exposes the postMarketOrder() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(
+      buycoins().postMarketOrder().amount('0.0983').post()
+    ).resolves.toEqual(TEST_RESPONSE)
+  })
+
+  it('exposes the postLimitOrder() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(
+      buycoins().postLimitOrder().amount('0.0983').sell().dynamic('0.22').post()
+    ).resolves.toEqual(TEST_RESPONSE)
+  })
+
   it('exposes the sendOffchain() api', async () => {
     const [, write] = useWriteMock()
 
