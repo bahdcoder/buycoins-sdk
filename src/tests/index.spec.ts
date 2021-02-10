@@ -150,7 +150,12 @@ describe('@buycoins/sdk', () => {
     )
 
     await expect(
-      buycoins().sendOffchain().amount('0.0983').usdCoin().recipient('TEST_RECIPIENT').post()
+      buycoins()
+        .sendOffchain()
+        .amount('0.0983')
+        .usdCoin()
+        .recipient('TEST_RECIPIENT')
+        .post()
     ).resolves.toEqual(TEST_RESPONSE)
   })
 })

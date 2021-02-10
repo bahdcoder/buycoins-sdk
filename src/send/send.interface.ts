@@ -10,12 +10,13 @@ import {
 export type SendFields =
   | Partial<keyof Omit<OnchainTransferRequest, 'transaction'>>
   | {
-      transaction:
-        (Partial<keyof Omit<Transaction, 'address' | 'onchainTransferRequest'>>
+      transaction: (
+        | Partial<keyof Omit<Transaction, 'address' | 'onchainTransferRequest'>>
         | Partial<{
-          onchainTransferRequest: SendFields[]
-          address: (Partial<keyof Address>)[]
-        }>)[]
+            onchainTransferRequest: SendFields[]
+            address: Partial<keyof Address>[]
+          }>
+      )[]
     }
 
 export type SendResponse = {

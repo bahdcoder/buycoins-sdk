@@ -86,7 +86,7 @@ class Buycoins {
     return send(this.key, this.secret)
   }
 
-    /**
+  /**
    * Send supported cryptocurrencies to internal BuyCoins users
    */
   sendOffchain(): ReturnType<typeof sendOffchain> {

@@ -9,7 +9,14 @@ class QueryBuilder {
     private mutation?: boolean
   ) {}
 
-  private enumVariables = ['cryptocurrency', 'side', 'status', 'orderStatus']
+  private enumVariables = [
+    'cryptocurrency',
+    'side',
+    'status',
+    'orderStatus',
+    'orderSide',
+    'priceType',
+  ]
 
   private integerVariables = ['first', 'last']
 

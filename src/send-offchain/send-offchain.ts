@@ -2,7 +2,11 @@ import Query from '../base/query'
 import request from '../api/request'
 import { Currencies } from '../types'
 import { applyMixins } from '../helpers/apply-mixins'
-import { SendOffchainVariables, SendOffchainFields, SendOffchainResponse } from './send-offchain.interface'
+import {
+  SendOffchainVariables,
+  SendOffchainFields,
+  SendOffchainResponse,
+} from './send-offchain.interface'
 import {
   FilterableByCryptocurrency,
   FilterableByCryptocurrencyInterface,
@@ -54,7 +58,11 @@ class SendOffchain extends Query<SendOffchainFields, SendOffchainVariables> {
    * @returns SendOffchain
    */
   public async post() {
-    return request<SendOffchainFields, SendOffchainVariables, SendOffchainResponse>()
+    return request<
+      SendOffchainFields,
+      SendOffchainVariables,
+      SendOffchainResponse
+    >()
       .fields(this.baseOptions.fields)
       .query('sendOffchain')
       .mutation()
@@ -65,6 +73,7 @@ class SendOffchain extends Query<SendOffchainFields, SendOffchainVariables> {
 
 applyMixins(SendOffchain, [FilterableByCryptocurrency])
 
-const sendOffchain = (key?: string, secret?: string) => new SendOffchain(key, secret)
+const sendOffchain = (key?: string, secret?: string) =>
+  new SendOffchain(key, secret)
 
 export default sendOffchain

@@ -131,8 +131,22 @@ export enum PriceType {
   dynamic = 'dynamic',
 }
 
+export enum PostOrderStatus {
+  inactive = 'inactive',
+  active = 'active',
+  pending_deactivation = 'pending_deactivation',
+  payment_pending = 'payment_pending',
+  payment_processing = 'payment_processing',
+  cancelled = 'cancelled',
+  expired = 'expired',
+  completed = 'completed',
+  open = 'open',
+  done = 'done',
+}
+
 export interface PostOrder {
   id: ID
+  status: keyof typeof PostOrderStatus
   coinAmount: BigDecimalApprox
   createdAt: UnixTimestamp
   cryptocurrency: keyof typeof Currencies

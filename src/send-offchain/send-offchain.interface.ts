@@ -1,8 +1,4 @@
-import {
-  Currencies,
-  BigDecimal,
-  GraphQlResponse,
-} from '../types'
+import { Currencies, BigDecimal, GraphQlResponse } from '../types'
 
 export type SendOffchainFields = 'initiated'
 

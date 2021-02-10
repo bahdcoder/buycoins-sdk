@@ -16,7 +16,11 @@ describe('<sendOffchain>', () => {
 
     mockRequest.mockImplementation(requestMock(write))
 
-    await sendOffchain().amount(TEST_AMOUNT).nairaToken().recipient(TEST_RECIPIENT).post()
+    await sendOffchain()
+      .amount(TEST_AMOUNT)
+      .nairaToken()
+      .recipient(TEST_RECIPIENT)
+      .post()
 
     expect(getQuery()).toBe(
       `mutation{sendOffchain(amount:\\\"0.00235\\\",cryptocurrency:naira_token,recipient:\\\"TEST_RECIPIENT\\\"){initiated}}`
@@ -34,9 +38,7 @@ describe('<sendOffchain>', () => {
       .amount(TEST_AMOUNT)
       .litecoin()
       .recipient(TEST_RECIPIENT)
-      .fields([
-        'initiated'
-      ])
+      .fields(['initiated'])
       .post()
 
     expect(getQuery()).toBe(
