@@ -13,7 +13,7 @@ export type PostLimitOrderFields = Partial<keyof PostLimitOrderFieldsInterface>
 
 export type PostLimitOrderResponse = {
   data: {
-    postLimitOrder: Partial<PostOrder>
+    postLimitOrder: PostOrder
   }
 } & GraphQlResponse
 

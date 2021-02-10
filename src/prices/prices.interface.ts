@@ -27,7 +27,7 @@ export type PricesFields = Partial<keyof PricesFieldsInterface>
 
 export type PricesResponse = GraphQlResponse & {
   data: {
-    getPrices: Partial<Price>[]
+    getPrices: Price
   }
 }
 

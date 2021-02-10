@@ -6,7 +6,7 @@ export type CreateAddressFields = Partial<keyof CreateAddressFieldsInterface>
 
 export type CreateAddressResponse = GraphQlResponse & {
   data: {
-    createAddress: Partial<Address>
+    createAddress: Address
   }
 }
 

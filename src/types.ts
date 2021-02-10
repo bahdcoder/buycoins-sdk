@@ -164,32 +164,32 @@ export interface PageInfo {
   hasPreviousPage: boolean
 }
 
-export type PostOrders = Partial<{
+export type PostOrders = {
   id: ID
   dynamicPriceExpiry: Int
-  orders: Partial<PostOrderConnection>
-}>
+  orders: PostOrderConnection
+}
 
 export type PaymentEdge = {
   cursor: string
   node: Payment
 }
 
-export type PaymentConnection = Partial<{
-  edges: Partial<PaymentEdge>[]
-  nodes: Partial<Payment>[]
-  pageInfo: Partial<PageInfo>
-}>
+export type PaymentConnection = {
+  edges: PaymentEdge[]
+  nodes: Payment[]
+  pageInfo: PageInfo
+}
 
 export interface PostOrderEdge {
   cursor: string
-  node: Partial<PostOrder>
+  node: PostOrder
 }
 
 export interface PostOrderConnection {
-  edges: Partial<PostOrderEdge>[]
-  nodes: Partial<PostOrder>[]
-  pageInfo: Partial<PageInfo>
+  edges: PostOrderEdge[]
+  nodes: PostOrder[]
+  pageInfo: PageInfo
 }
 
 export enum OnchainTransferRequestStatus {
