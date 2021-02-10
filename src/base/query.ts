@@ -22,6 +22,12 @@ class Query<FieldInterface = any, VariablesMapInterface = {}> {
 
     return this
   }
+
+  public variables(variables: VariablesMapInterface) {
+    this.baseOptions.variables = variables
+
+    return this
+  }
 }
 
 export default Query

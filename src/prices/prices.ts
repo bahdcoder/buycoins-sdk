@@ -1,4 +1,3 @@
-import { Side } from '../types'
 import Query from '../base/query'
 import request from '../api/request'
 import { applyMixins } from '../helpers/apply-mixins'
@@ -7,8 +6,14 @@ import {
   FilterableByCryptocurrencyInterface,
 } from '../helpers/filterable-by-currency'
 import { PricesFields, PricesVariables } from './prices.interface'
+import {
+  FilterableBySide,
+  FilterableBySideInterface,
+} from '../helpers/filterable-by-side'
 
-interface Prices extends FilterableByCryptocurrencyInterface {}
+interface Prices
+  extends FilterableByCryptocurrencyInterface,
+    FilterableBySideInterface {}
 
 class Prices extends Query<PricesFields, PricesVariables> {
   public static fields: PricesFields[] = [
@@ -28,29 +33,6 @@ class Prices extends Query<PricesFields, PricesVariables> {
     super(key, secret)
 
     super.fields(Prices.fields)
-  }
-
-  /**
-   * Get the buy price for the selected currencies
-   *
-   * @returns Prices
-   */
-  public buy() {
-    this.baseOptions.variables.side = Side.buy
-
-    return this
-  }
-
-  /**
-   *
-   * Get the sell price for the selected currencies
-   *
-   * @returns Prices
-   */
-  public sell() {
-    this.baseOptions.variables.side = Side.sell
-
-    return this
   }
 
   /**
@@ -76,7 +58,7 @@ class Prices extends Query<PricesFields, PricesVariables> {
   }
 }
 
-applyMixins(Prices, [FilterableByCryptocurrency])
+applyMixins(Prices, [FilterableByCryptocurrency, FilterableBySide])
 
 const prices = (key?: string, secret?: string) => new Prices(key, secret)
 

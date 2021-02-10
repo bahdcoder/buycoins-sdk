@@ -24,6 +24,11 @@ class Https<
     variables: {} as any,
   }
 
+  constructor(
+    private key = process.env.BUYCOINS_PUBLIC_KEY,
+    private secret = process.env.BUYCOINS_SECRET_KEY
+  ) {}
+
   private getParsedData(data: string) {
     try {
       return JSON.parse(data)
@@ -57,7 +62,7 @@ class Https<
           port: 443,
           headers: {
             authorization: `Basic ${Buffer.from(
-              `z1aAsW5xOaw:eWwbpbmIT_gpJwMZ6znTKYQOn17d9VJzZbpN19KjiHc`
+              `${this.key}:${this.secret}`
             ).toString('base64')}`,
             'Content-Length': Buffer.byteLength(payload),
           },
@@ -146,7 +151,10 @@ class Https<
   }
 }
 
-const request = <FieldsInterface, VariablesInterface, ResponseInterface>() =>
-  new Https<FieldsInterface, VariablesInterface, ResponseInterface>()
+const request = <FieldsInterface, VariablesInterface, ResponseInterface>(
+  key?: string,
+  secret?: string
+) =>
+  new Https<FieldsInterface, VariablesInterface, ResponseInterface>(key, secret)
 
 export default request

@@ -1,3 +1,6 @@
+const isObject = (item: any) =>
+  typeof item === 'object' && !Array.isArray(item) && item !== null
+
 class QueryBuilder {
   constructor(
     private name: string,
@@ -6,21 +9,61 @@ class QueryBuilder {
     private mutation?: boolean
   ) {}
 
-  getVariables() {
-    const variablesList = Object.keys(this.variables).map((key) => ({
+  getVariables(
+    variablesMap = this.variables.root ? this.variables.root : this.variables
+  ) {
+    const variablesList = Object.keys(variablesMap).map((key) => ({
       key,
-      value: this.variables[key],
+      value: variablesMap[key],
     }))
 
     if (variablesList.length === 0) {
       return ''
     }
 
-    return `(${variablesList.map((variable, index) => {
-      return `${variable.key}:${variable.value}${
-        index === variablesList.length - 1 ? '' : ''
-      }`
-    })})`
+    return `(${variablesList
+      .filter((variable) => typeof variable.value === 'string')
+      .map((variable, index) => {
+        return `${variable.key}:${variable.value}${
+          index === variablesList.length - 1 ? '' : ''
+        }`
+      })})`
+  }
+
+  buildField(field: any) {
+    if (typeof field === 'string') {
+      return field
+    }
+
+    let queries = ``
+
+    const compileObjectQuery = (field: any) => {
+      Object.keys(field).forEach((key, fieldIndex) => {
+        queries = `${queries} ${key}${
+          this.variables.root[key]
+            ? this.getVariables(this.variables.root[key])
+            : ''
+        } {`
+
+        field[key].forEach((nestedKey: any, nestedKeyIndex: number) => {
+          if (isObject(nestedKey)) {
+            compileObjectQuery(nestedKey)
+          } else {
+            queries = `${queries} ${nestedKey}${
+              nestedKeyIndex === field[key].length - 1 ? ' }' : ','
+            }`
+          }
+        })
+
+        queries = `${queries}${
+          fieldIndex === Object.keys(field).length - 1 && ' }'
+        }`
+      })
+    }
+
+    compileObjectQuery(field)
+
+    return queries.slice(0, -1)
   }
 
   build() {
@@ -28,7 +71,11 @@ class QueryBuilder {
 
     return `
         ${queryType} { ${this.name}${this.getVariables()} {
-            ${this.fields.map((field) => `${field}`)}
+            ${this.fields.map(
+              (field) => `
+            ${this.buildField(field)}  
+          `
+            )}
         } }
     `
   }

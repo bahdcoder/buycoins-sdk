@@ -45,4 +45,16 @@ describe('@buycoins/sdk', () => {
       TEST_RESPONSE
     )
   })
+
+  it('exposes the estimatedNetworkFee() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(
+      buycoins().estimatedNetworkFee().litecoin().get()
+    ).resolves.toEqual(TEST_RESPONSE)
+  })
 })

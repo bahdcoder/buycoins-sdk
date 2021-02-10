@@ -64,3 +64,29 @@ export interface GraphQlResponse<ShapeOfData = any> {
   data: ShapeOfData
   errors: GraphqlError[]
 }
+
+export enum PriceType {
+  static = 'static',
+  dynamic = 'dynamic',
+}
+
+export interface PostOrder {
+  id: ID
+  coinAmount: BigDecimalApprox
+  createdAt: UnixTimestamp
+  cryptocurrency: keyof typeof Currencies
+  dynamicExchangeRate: BigDecimal
+  pricePerCoin: BigDecimalApprox
+  priceType: keyof typeof PriceType
+  side: keyof typeof Side
+  staticPrice: BigDecimal
+}
+
+export interface PostOrderEdge {
+  cursor: string
+  node: Partial<PostOrder>
+}
+
+export interface PostOrderConnection {
+  edges: Partial<PostOrderEdge>[]
+}

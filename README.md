@@ -75,7 +75,7 @@ The `@buycoins/sdk` project provides a simple way to integrate the Buycoins Grap
 - [Create cryptocurrency addresses](#create-cryptocurrency-addresses)
 
 ## Installation
-The installation is in three steps: First: get your API keys, second: install the package into your project.
+The installation is in two steps: First: get your API keys, second: install the package into your project.
 
 ### Get API Keys
 Before getting started, you would need to request access to the Buycoins API. You may send an [email to their support team](mailto:support@buycoins.africa), stating the application you would love to build. Shouldn't take more than an hour or two to get acces.
@@ -164,7 +164,7 @@ const { data } = await buycoins().bankAccounts().accountNumber('0243911239').get
 You may retrieve the estimated network fee to send supported cryptocurrencies using the `.estimatedNetworkFee()` method. You also need to specify which currency you are interested in, and the amount of coins you want to transfer:
 
 ```js
-const { data } = await buycoins().amount(0.0213).ethereum().estimatedNetworkFee().get()
+const { data } = await buycoins().estimatedNetworkFee().amount(0.0213).ethereum().get()
 ```
 
 You may use any of the [supported currency methods](#supported-currency-methods) to get the estimated network fee for a single currency.
