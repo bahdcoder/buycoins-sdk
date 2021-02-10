@@ -151,3 +151,42 @@ export interface PostOrderEdge {
 export interface PostOrderConnection {
   edges: Partial<PostOrderEdge>[]
 }
+
+export enum OnchainTransferRequestStatus {
+  unconfirmed = 'unconfirmed',
+  confirmed = 'confirmed',
+  flagged = 'flagged',
+  failed = 'failed',
+  expired = 'expired',
+  processed = 'processed',
+  ready_for_processing = 'ready_for_processing',
+  processing = 'processing',
+}
+
+export enum TransactionDirection {
+  incoming = 'incoming',
+  outgoing = 'outgoing',
+}
+
+export interface Transaction {
+  id: ID
+  txhash: string
+  address: Address
+  amount: BigDecimalApprox
+  confirmed: Boolean
+  createdAt: UnixTimestamp
+  cryptocurrency: keyof typeof Currencies
+  direction: keyof typeof TransactionDirection
+  onchainTransferRequest: OnchainTransferRequest
+}
+
+export interface OnchainTransferRequest {
+  address: String
+  amount: BigDecimalApprox
+  createdAt: UnixTimestamp
+  cryptocurrency: keyof typeof Currencies
+  fee: BigDecimalApprox
+  id: ID
+  status: keyof typeof OnchainTransferRequestStatus
+  transaction: Transaction
+}

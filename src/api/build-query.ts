@@ -11,8 +11,13 @@ class QueryBuilder {
 
   private enumVariables = ['cryptocurrency', 'side', 'status', 'orderStatus']
 
+  private integerVariables = ['first', 'last']
+
   private getVariableValue(variable: { key: string; value: string }) {
-    if (this.enumVariables.includes(variable.key)) {
+    if (
+      this.enumVariables.includes(variable.key) ||
+      this.integerVariables.includes(variable.key)
+    ) {
       return `${variable.key}:${variable.value}`
     }
 
@@ -48,7 +53,7 @@ class QueryBuilder {
     const compileObjectQuery = (field: any) => {
       Object.keys(field).forEach((key, fieldIndex) => {
         queries = `${queries} ${key}${
-          this.variables.root[key]
+          this.variables.root[key] && isObject(this.variables.root[key])
             ? this.getVariables(this.variables.root[key])
             : ''
         } {`
@@ -64,7 +69,7 @@ class QueryBuilder {
         })
 
         queries = `${queries}${
-          fieldIndex === Object.keys(field).length - 1 && ' }'
+          fieldIndex === Object.keys(field).length - 1 ? ' }' : ''
         }`
       })
     }

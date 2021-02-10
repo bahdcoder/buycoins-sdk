@@ -94,6 +94,18 @@ describe('@buycoins/sdk', () => {
     )
   })
 
+  it('exposes the sell() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(buycoins().sell().litecoin().post()).resolves.toEqual(
+      TEST_RESPONSE
+    )
+  })
+
   it('exposes the createAddress() api', async () => {
     const [, write] = useWriteMock()
 
@@ -115,6 +127,30 @@ describe('@buycoins/sdk', () => {
 
     await expect(
       buycoins().cancelWithdrawal().payment('PAYMENT_ID').post()
+    ).resolves.toEqual(TEST_RESPONSE)
+  })
+
+  it('exposes the send() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(
+      buycoins().send().amount('0.0983').address('TEST_ADDRESS').post()
+    ).resolves.toEqual(TEST_RESPONSE)
+  })
+
+  it('exposes the sendOffchain() api', async () => {
+    const [, write] = useWriteMock()
+
+    mockRequest.mockImplementation(
+      requestMock(write, undefined, 200, TEST_RESPONSE)
+    )
+
+    await expect(
+      buycoins().sendOffchain().amount('0.0983').usdCoin().recipient('TEST_RECIPIENT').post()
     ).resolves.toEqual(TEST_RESPONSE)
   })
 })

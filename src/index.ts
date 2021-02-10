@@ -8,6 +8,9 @@ import estimatedNetworkFee from './estimated-network-fee/estimated-network-fee'
 
 // mutations
 import buy from './buy/buy'
+import sell from './sell/sell'
+import send from './send/send'
+import sendOffchain from './send-offchain/send-offchain'
 import createAddress from './create-address/create-address'
 import cancelWithdrawal from './cancel-withdrawal/cancel-withdrawal'
 
@@ -70,6 +73,27 @@ class Buycoins {
   }
 
   /**
+   * Sell an amount of crypto
+   */
+  sell(): ReturnType<typeof sell> {
+    return sell(this.key, this.secret)
+  }
+
+  /**
+   * Send an amount of supported crypto to an external address
+   */
+  send(): ReturnType<typeof send> {
+    return send(this.key, this.secret)
+  }
+
+    /**
+   * Send supported cryptocurrencies to internal BuyCoins users
+   */
+  sendOffchain(): ReturnType<typeof sendOffchain> {
+    return sendOffchain(this.key, this.secret)
+  }
+
+  /**
    * Cancel an existing payment withdrawal
    */
   cancelWithdrawal(): ReturnType<typeof cancelWithdrawal> {
@@ -77,7 +101,7 @@ class Buycoins {
   }
 
   /**
-   * Create a crypto adddre
+   * Create a crypto address to receive coins
    */
   createAddress(): ReturnType<typeof createAddress> {
     return createAddress(this.key, this.secret)
