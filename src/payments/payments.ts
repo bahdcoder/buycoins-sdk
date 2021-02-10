@@ -18,7 +18,11 @@ import {
   FilterableByCursorInterface,
 } from '../helpers/filterable-by-cursor'
 
-import { PaymentsFields, PaymentsVariables } from './payments.interface'
+import {
+  PaymentsFields,
+  PaymentsVariables,
+  PaymentsResponse,
+} from './payments.interface'
 
 interface Payments
   extends FilterableByCryptocurrencyInterface,
@@ -80,15 +84,10 @@ class Payments extends Query<PaymentsFields, PaymentsVariables> {
    * @returns Prices
    */
   public async get() {
-    return request<
-      PaymentsFields,
-      PaymentsVariables,
-      {
-        data: {
-          getPayments: PaymentsFields
-        }
-      }
-    >(this.key, this.secret)
+    return request<PaymentsFields, PaymentsVariables, PaymentsResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('getPayments')
       .variables(this.baseOptions.variables)

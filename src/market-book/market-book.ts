@@ -6,7 +6,11 @@ import {
   FilterableByCryptocurrency,
   FilterableByCryptocurrencyInterface,
 } from '../helpers/filterable-by-currency'
-import { MarketBookFields, MarketBookVariables } from './market-book.interface'
+import {
+  MarketBookFields,
+  MarketBookVariables,
+  MarketBookResponse,
+} from './market-book.interface'
 
 interface MarketBook extends FilterableByCryptocurrencyInterface {}
 
@@ -70,15 +74,10 @@ class MarketBook extends Query<MarketBookFields, MarketBookVariables> {
    * @returns Prices
    */
   public async get() {
-    return request<
-      MarketBookFields,
-      MarketBookVariables,
-      {
-        data: {
-          getMarketBook: MarketBookFields
-        }
-      }
-    >(this.key, this.secret)
+    return request<MarketBookFields, MarketBookVariables, MarketBookResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('getMarketBook')
       .variables(this.baseOptions.variables)

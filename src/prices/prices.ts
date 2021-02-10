@@ -5,7 +5,11 @@ import {
   FilterableByCryptocurrency,
   FilterableByCryptocurrencyInterface,
 } from '../helpers/filterable-by-currency'
-import { PricesFields, PricesVariables } from './prices.interface'
+import {
+  PricesFields,
+  PricesVariables,
+  PricesResponse,
+} from './prices.interface'
 import {
   FilterableBySide,
   FilterableBySideInterface,
@@ -42,15 +46,7 @@ class Prices extends Query<PricesFields, PricesVariables> {
    * @returns Prices
    */
   public async get() {
-    return request<
-      PricesFields,
-      PricesVariables,
-      {
-        data: {
-          getPrices: PricesFields[]
-        }
-      }
-    >()
+    return request<PricesFields, PricesVariables, PricesResponse>()
       .fields(this.baseOptions.fields)
       .query('getPrices')
       .variables(this.baseOptions.variables)

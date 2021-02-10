@@ -5,6 +5,7 @@ import { applyMixins } from '../helpers/apply-mixins'
 import {
   CreateAddressVariables,
   CreateAddressFields,
+  CreateAddressResponse,
 } from './create-address.interface'
 import {
   FilterableByCryptocurrency,
@@ -43,11 +44,7 @@ class CreateAddress extends Query<CreateAddressFields, CreateAddressVariables> {
     return request<
       CreateAddressFields,
       CreateAddressVariables,
-      {
-        data: {
-          createAddress: CreateAddressFields
-        }
-      }
+      CreateAddressResponse
     >()
       .fields(this.baseOptions.fields)
       .query('createAddress')

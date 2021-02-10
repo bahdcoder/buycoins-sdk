@@ -4,6 +4,7 @@ import { applyMixins } from '../helpers/apply-mixins'
 import {
   EstimatedNetworkFeeVariables,
   EstimatedNetworkFeeFields,
+  EstimatedNetworkFeeResponse,
 } from './estimated-network-fee.interface'
 import {
   FilterableByCryptocurrency,
@@ -45,11 +46,7 @@ class EstimatedNetworkFee extends Query<
     return request<
       EstimatedNetworkFeeFields,
       EstimatedNetworkFeeVariables,
-      {
-        data: {
-          getEstimatedNetworkFee: EstimatedNetworkFeeFields[]
-        }
-      }
+      EstimatedNetworkFeeResponse
     >()
       .fields(this.baseOptions.fields)
       .query('getEstimatedNetworkFee')

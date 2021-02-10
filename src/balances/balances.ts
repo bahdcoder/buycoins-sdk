@@ -1,7 +1,11 @@
 import Query from '../base/query'
 import request from '../api/request'
 import { applyMixins } from '../helpers/apply-mixins'
-import { BalancesVariables, BalancesFields } from './balances.interface'
+import {
+  BalancesVariables,
+  BalancesFields,
+  BalancesResponse,
+} from './balances.interface'
 import {
   FilterableByCryptocurrency,
   FilterableByCryptocurrencyInterface,
@@ -29,15 +33,7 @@ class Balances extends Query<BalancesFields, BalancesVariables> {
    * @returns Balances
    */
   public async get() {
-    return request<
-      BalancesFields,
-      BalancesVariables,
-      {
-        data: {
-          getBalances: BalancesFields[]
-        }
-      }
-    >()
+    return request<BalancesFields, BalancesVariables, BalancesResponse>()
       .fields(this.baseOptions.fields)
       .query('getBalances')
       .variables(this.baseOptions.variables)

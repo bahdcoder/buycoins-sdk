@@ -15,7 +15,11 @@ import {
   FilterableByStatusInterface,
 } from '../helpers/filterable-by-status'
 
-import { OrdersFields, OrdersVariables } from './orders.interface'
+import {
+  OrdersFields,
+  OrdersVariables,
+  OrdersResponse,
+} from './orders.interface'
 
 interface Orders
   extends FilterableByCryptocurrencyInterface,
@@ -73,15 +77,10 @@ class Orders extends Query<OrdersFields, OrdersVariables> {
    * @returns Prices
    */
   public async get() {
-    return request<
-      OrdersFields,
-      OrdersVariables,
-      {
-        data: {
-          getOrders: OrdersFields
-        }
-      }
-    >(this.key, this.secret)
+    return request<OrdersFields, OrdersVariables, OrdersResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('getOrders')
       .variables(this.baseOptions.variables)

@@ -1,3 +1,5 @@
+import { GraphQlResponse, PaymentConnection } from '../types'
+
 export type PaymentNodeType = Partial<
   [
     'id',
@@ -28,6 +30,12 @@ export type PaymentsFields =
   | {
       nodes: PaymentNodeType
     }
+
+export type PaymentsResponse = GraphQlResponse & {
+  data: {
+    getPayments: PaymentConnection
+  }
+}
 
 export interface PaymentsVariables {
   root: {

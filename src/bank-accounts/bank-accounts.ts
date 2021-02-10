@@ -3,6 +3,7 @@ import request from '../api/request'
 import { BankAccount } from '../types'
 import {
   BankAccountsFields,
+  BankAccountsResponse,
   BankAccountsVariables,
 } from './bank-accounts.interface'
 
@@ -46,11 +47,7 @@ class BankAccounts extends Query<BankAccountsFields, BankAccountsVariables> {
     return request<
       BankAccountsFields,
       BankAccountsVariables,
-      {
-        data: {
-          getBankAccounts: BankAccountsFields[]
-        }
-      }
+      BankAccountsResponse
     >()
       .fields(this.baseOptions.fields)
       .query('getBankAccounts')

@@ -1,7 +1,14 @@
-import { Currencies, Side, Status } from '../types'
+import { Currencies, GraphQlResponse, Side, Status, PostOrders } from '../types'
+
 import { MarketBookFields } from '../market-book/market-book.interface'
 
 export type OrdersFields = MarketBookFields
+
+export type OrdersResponse = GraphQlResponse & {
+  data: {
+    getOrders: PostOrders
+  }
+}
 
 export interface OrdersVariables {
   root: {

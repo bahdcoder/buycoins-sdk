@@ -1,10 +1,12 @@
 import {
+  ID,
+  Side,
+  Price,
   Currencies,
   BigDecimal,
-  UnixTimestamp,
-  ID,
   PriceStatus,
-  Side,
+  UnixTimestamp,
+  GraphQlResponse,
 } from '../types'
 
 export interface PricesFieldsInterface {
@@ -22,6 +24,12 @@ export interface PricesFieldsInterface {
 }
 
 export type PricesFields = Partial<keyof PricesFieldsInterface>
+
+export type PricesResponse = GraphQlResponse & {
+  data: {
+    getPrices: Partial<Price>[]
+  }
+}
 
 export interface PricesVariables {
   cryptocurrency?: keyof typeof Currencies

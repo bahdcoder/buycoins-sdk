@@ -1,4 +1,4 @@
-import { BigDecimal, Currencies } from '../types'
+import { BigDecimal, Currencies, GraphQlResponse, PostOrders } from '../types'
 
 export type MarketBookFields =
   | 'id'
@@ -32,6 +32,12 @@ export type MarketBookFields =
         ]
       >
     }
+
+export type MarketBookResponse = GraphQlResponse & {
+  data: {
+    getMarketBook: PostOrders
+  }
+}
 
 export interface MarketBookVariables {
   root: {

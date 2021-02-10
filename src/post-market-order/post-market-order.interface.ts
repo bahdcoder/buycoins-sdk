@@ -14,7 +14,7 @@ export type PostMarketOrderFields = Partial<
 
 export type PostMarketOrderResponse = {
   data: {
-    postMarketOrder: PostOrder
+    postMarketOrder: Partial<PostOrder>
   }
 } & GraphQlResponse
 

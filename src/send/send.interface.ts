@@ -21,7 +21,7 @@ export type SendFields =
 
 export type SendResponse = {
   data: {
-    send: OnchainTransferRequest
+    send: Partial<OnchainTransferRequest>
   }
 } & GraphQlResponse
 

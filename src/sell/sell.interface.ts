@@ -6,7 +6,7 @@ export type SellFields = Partial<keyof SellFieldsInterface>
 
 export type SellResponse = {
   data: {
-    Sell: Order
+    Sell: Partial<Order>
   }
 } & GraphQlResponse
 

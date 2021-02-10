@@ -8,7 +8,7 @@ export type CancelWithdrawalFields = Partial<
 
 export type CancelWithdrawalResponse = {
   data: {
-    cancelWithdrawal: Payment
+    cancelWithdrawal: Partial<Payment>
   }
 } & GraphQlResponse
 

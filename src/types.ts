@@ -157,6 +157,30 @@ export interface PostOrder {
   staticPrice: BigDecimal
 }
 
+export interface PageInfo {
+  startCursor: string
+  endCursor: string
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+}
+
+export type PostOrders = Partial<{
+  id: ID
+  dynamicPriceExpiry: Int
+  orders: Partial<PostOrderConnection>
+}>
+
+export type PaymentEdge = {
+  cursor: string
+  node: Payment
+}
+
+export type PaymentConnection = Partial<{
+  edges: Partial<PaymentEdge>[]
+  nodes: Partial<Payment>[]
+  pageInfo: Partial<PageInfo>
+}>
+
 export interface PostOrderEdge {
   cursor: string
   node: Partial<PostOrder>
@@ -164,6 +188,8 @@ export interface PostOrderEdge {
 
 export interface PostOrderConnection {
   edges: Partial<PostOrderEdge>[]
+  nodes: Partial<PostOrder>[]
+  pageInfo: Partial<PageInfo>
 }
 
 export enum OnchainTransferRequestStatus {
