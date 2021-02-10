@@ -41,7 +41,7 @@ class Send extends Query<SendFields, SendVariables> {
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(Send.fields)
@@ -76,7 +76,10 @@ class Send extends Query<SendFields, SendVariables> {
    * @returns Send
    */
   public async post() {
-    return request<SendFields, SendVariables, SendResponse>()
+    return request<SendFields, SendVariables, SendResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('send')
       .mutation()

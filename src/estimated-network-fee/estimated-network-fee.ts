@@ -19,7 +19,7 @@ class EstimatedNetworkFee extends Query<
 > {
   public static fields: EstimatedNetworkFeeFields[] = ['estimatedFee', 'total']
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(EstimatedNetworkFee.fields)
@@ -47,7 +47,7 @@ class EstimatedNetworkFee extends Query<
       EstimatedNetworkFeeFields,
       EstimatedNetworkFeeVariables,
       EstimatedNetworkFeeResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('getEstimatedNetworkFee')
       .variables(this.baseOptions.variables)

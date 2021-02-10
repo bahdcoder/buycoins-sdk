@@ -20,7 +20,7 @@ class Balances extends Query<BalancesFields, BalancesVariables> {
     'cryptocurrency',
   ]
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(Balances.fields)
@@ -33,7 +33,10 @@ class Balances extends Query<BalancesFields, BalancesVariables> {
    * @returns Balances
    */
   public async get() {
-    return request<BalancesFields, BalancesVariables, BalancesResponse>()
+    return request<BalancesFields, BalancesVariables, BalancesResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('getBalances')
       .variables(this.baseOptions.variables)

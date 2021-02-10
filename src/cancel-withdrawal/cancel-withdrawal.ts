@@ -33,7 +33,7 @@ class CancelWithdrawal extends Query<
     root: {},
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(CancelWithdrawal.fields)
@@ -61,7 +61,7 @@ class CancelWithdrawal extends Query<
       CancelWithdrawalFields,
       CancelWithdrawalVariables,
       CancelWithdrawalResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('cancelWithdrawal')
       .mutation()

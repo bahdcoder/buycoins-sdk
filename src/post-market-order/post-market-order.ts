@@ -38,7 +38,7 @@ class PostMarketOrder extends Query<
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(PostMarketOrder.fields)
@@ -85,7 +85,7 @@ class PostMarketOrder extends Query<
       PostMarketOrderFields,
       PostMarketOrderVariables,
       PostMarketOrderResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('postMarketOrder')
       .mutation()

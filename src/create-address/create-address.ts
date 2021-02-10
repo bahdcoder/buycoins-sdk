@@ -28,7 +28,7 @@ class CreateAddress extends Query<CreateAddressFields, CreateAddressVariables> {
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(CreateAddress.fields)
@@ -45,7 +45,7 @@ class CreateAddress extends Query<CreateAddressFields, CreateAddressVariables> {
       CreateAddressFields,
       CreateAddressVariables,
       CreateAddressResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('createAddress')
       .mutation()

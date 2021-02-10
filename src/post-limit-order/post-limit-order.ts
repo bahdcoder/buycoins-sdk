@@ -38,7 +38,7 @@ class PostLimitOrder extends Query<
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(PostLimitOrder.fields)
@@ -107,7 +107,7 @@ class PostLimitOrder extends Query<
       PostLimitOrderFields,
       PostLimitOrderVariables,
       PostLimitOrderResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('postLimitOrder')
       .mutation()

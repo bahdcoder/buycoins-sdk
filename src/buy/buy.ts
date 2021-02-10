@@ -28,7 +28,7 @@ class Buy extends Query<BuyFields, BuyVariables> {
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(Buy.fields)
@@ -62,7 +62,7 @@ class Buy extends Query<BuyFields, BuyVariables> {
    * @returns Buy
    */
   public async post() {
-    return request<BuyFields, BuyVariables, BuyResponse>()
+    return request<BuyFields, BuyVariables, BuyResponse>(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('buy')
       .mutation()

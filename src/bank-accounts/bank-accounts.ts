@@ -17,7 +17,7 @@ class BankAccounts extends Query<BankAccountsFields, BankAccountsVariables> {
     'bankName',
   ]
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(BankAccounts.fields)
@@ -48,7 +48,7 @@ class BankAccounts extends Query<BankAccountsFields, BankAccountsVariables> {
       BankAccountsFields,
       BankAccountsVariables,
       BankAccountsResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('getBankAccounts')
       .variables(this.baseOptions.variables)

@@ -28,7 +28,7 @@ class Sell extends Query<SellFields, SellVariables> {
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(Sell.fields)
@@ -62,7 +62,10 @@ class Sell extends Query<SellFields, SellVariables> {
    * @returns Sell
    */
   public async post() {
-    return request<SellFields, SellVariables, SellResponse>()
+    return request<SellFields, SellVariables, SellResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('sell')
       .mutation()

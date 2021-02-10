@@ -23,7 +23,7 @@ class SendOffchain extends Query<SendOffchainFields, SendOffchainVariables> {
     },
   }
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(SendOffchain.fields)
@@ -62,7 +62,7 @@ class SendOffchain extends Query<SendOffchainFields, SendOffchainVariables> {
       SendOffchainFields,
       SendOffchainVariables,
       SendOffchainResponse
-    >()
+    >(this.key, this.secret)
       .fields(this.baseOptions.fields)
       .query('sendOffchain')
       .mutation()

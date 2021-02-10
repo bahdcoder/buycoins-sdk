@@ -33,7 +33,7 @@ class Prices extends Query<PricesFields, PricesVariables> {
     'sellPricePerCoin',
   ]
 
-  constructor(key?: string, secret?: string) {
+  constructor(private key?: string, private secret?: string) {
     super(key, secret)
 
     super.fields(Prices.fields)
@@ -46,7 +46,10 @@ class Prices extends Query<PricesFields, PricesVariables> {
    * @returns Prices
    */
   public async get() {
-    return request<PricesFields, PricesVariables, PricesResponse>()
+    return request<PricesFields, PricesVariables, PricesResponse>(
+      this.key,
+      this.secret
+    )
       .fields(this.baseOptions.fields)
       .query('getPrices')
       .variables(this.baseOptions.variables)
