@@ -142,7 +142,7 @@ describe('@buycoins/sdk', () => {
     ).resolves.toEqual(TEST_RESPONSE)
   })
 
-  it('exposes the postMarketOrder() api', async () => {
+  it('exposes the marketOrder() api', async () => {
     const [, write] = useWriteMock()
 
     mockRequest.mockImplementation(
@@ -150,11 +150,11 @@ describe('@buycoins/sdk', () => {
     )
 
     await expect(
-      buycoins().postMarketOrder().amount('0.0983').post()
+      buycoins().marketOrder().amount('0.0983').post()
     ).resolves.toEqual(TEST_RESPONSE)
   })
 
-  it('exposes the postLimitOrder() api', async () => {
+  it('exposes the limitOrder() api', async () => {
     const [, write] = useWriteMock()
 
     mockRequest.mockImplementation(
@@ -162,7 +162,7 @@ describe('@buycoins/sdk', () => {
     )
 
     await expect(
-      buycoins().postLimitOrder().amount('0.0983').sell().dynamic('0.22').post()
+      buycoins().limitOrder().amount('0.0983').sell().dynamic('0.22').post()
     ).resolves.toEqual(TEST_RESPONSE)
   })
 

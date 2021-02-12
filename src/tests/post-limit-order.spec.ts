@@ -1,5 +1,5 @@
 import { request } from 'https'
-import postLimitOrder from '../post-limit-order/post-limit-order'
+import limitOrder from '../post-limit-order/post-limit-order'
 
 import { useWriteMock, requestMock } from './helpers'
 
@@ -7,14 +7,14 @@ const mockRequest = (request as unknown) as jest.Mock
 
 jest.mock('https')
 
-describe('<postLimitOrder>', () => {
+describe('<limitOrder>', () => {
   it('posts a dynamic sell limit order', async () => {
     const TEST_AMOUNT = '0.002'
     const [getQuery, write] = useWriteMock()
 
     mockRequest.mockImplementation(requestMock(write))
 
-    await postLimitOrder().amount(TEST_AMOUNT).sell().dynamic('0.3422').post()
+    await limitOrder().amount(TEST_AMOUNT).sell().dynamic('0.3422').post()
 
     expect(getQuery()).toBe(
       `mutation{postLimitOrder(coinAmount:\\\"0.002\\\",orderSide:sell,dynamicExchangeRate:\\\"0.3422\\\",priceType:dynamic){id,side,side,status,priceType,createdAt,coinAmount,staticPrice,pricePerCoin,cryptocurrency,dynamicExchangeRate}}`
@@ -27,7 +27,7 @@ describe('<postLimitOrder>', () => {
 
     mockRequest.mockImplementation(requestMock(write))
 
-    await postLimitOrder()
+    await limitOrder()
       .amount(TEST_AMOUNT)
       .static('0.23343')
       .buy()

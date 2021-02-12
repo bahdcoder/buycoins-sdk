@@ -4,7 +4,7 @@
     "build": "yarn clean && tsc --p tsconfig.json",
     "dev": "yarn clean && tsc --p tsconfig.json --watch",
     "clean": "rimraf build/",
-    "prettier": "prettier --write './**/*.ts'",
+    "prettier": "prettier --write ./**/*.ts",
     "commit": "npx git-cz"
   },
   "name": "@buycoins/sdk",
