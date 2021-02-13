@@ -22,7 +22,6 @@ class MarketBook extends Query<MarketBookFields, MarketBookVariables> {
   }
 
   public static fields: MarketBookFields[] = [
-    'id',
     'dynamicPriceExpiry',
     {
       orders: [

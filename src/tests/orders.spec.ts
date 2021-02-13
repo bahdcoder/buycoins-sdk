@@ -15,7 +15,7 @@ describe('<orders>', () => {
     await orders().get()
 
     expect(getQuery()).toBe(
-      `query{getOrders(cryptocurrency:bitcoin,status:open){id,dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
+      `query{getOrders(cryptocurrency:bitcoin,status:open){dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
     )
   })
 
@@ -27,7 +27,7 @@ describe('<orders>', () => {
     await orders().open().sell().get()
 
     expect(getQuery()).toBe(
-      `query{getOrders(cryptocurrency:bitcoin,status:open,side:sell){id,dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
+      `query{getOrders(cryptocurrency:bitcoin,status:open,side:sell){dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
     )
   })
 
@@ -39,7 +39,7 @@ describe('<orders>', () => {
     await orders().ethereum().completed().sell().get()
 
     expect(getQuery()).toBe(
-      `query{getOrders(cryptocurrency:ethereum,status:open,side:sell){id,dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
+      `query{getOrders(cryptocurrency:ethereum,status:open,side:sell){dynamicPriceExpiry,orders{edges{cursor,node{id,coinAmount,createdAt,cryptocurrency,dynamicExchangeRate,pricePerCoin,priceType,side,staticPrice,status}}}}}`
     )
   })
 })

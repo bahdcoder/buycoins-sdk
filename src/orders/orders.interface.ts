@@ -6,7 +6,7 @@ export type OrdersFields = MarketBookFields
 
 export type OrdersResponse = GraphQlResponse & {
   data: {
-    getOrders: PostOrders
+    getOrders: Omit<PostOrders, 'id'>
   }
 }
 

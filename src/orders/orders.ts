@@ -36,7 +36,6 @@ class Orders extends Query<OrdersFields, OrdersVariables> {
   }
 
   public static fields: OrdersFields[] = [
-    'id',
     'dynamicPriceExpiry',
     {
       orders: [

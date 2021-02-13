@@ -27,5 +27,6 @@
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": ["jest.config.ts", "node_modules/", "src/tests"]
 }

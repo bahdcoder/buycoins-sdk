@@ -1,7 +1,6 @@
 import { BigDecimal, Currencies, GraphQlResponse, PostOrders } from '../types'
 
 export type MarketBookFields =
-  | 'id'
   | 'dynamicPriceExpiry'
   | {
       orders: Partial<
@@ -35,7 +34,7 @@ export type MarketBookFields =
 
 export type MarketBookResponse = GraphQlResponse & {
   data: {
-    getMarketBook: PostOrders
+    getMarketBook: Omit<PostOrders, 'id'>
   }
 }
 
