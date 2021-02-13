@@ -6,7 +6,7 @@ export type BalancesFields = Partial<keyof BalancesFieldsInterface>
 
 export type BalancesResponse = GraphQlResponse & {
   data: {
-    getBalances: Partial<Account>[]
+    getBalances: Account[]
   }
 }
 

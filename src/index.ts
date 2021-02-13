@@ -124,4 +124,5 @@ class Buycoins {
   }
 }
 
-export const buycoins = (key?: string, secret?: string) => new Buycoins(key, secret)
+export const buycoins = (key?: string, secret?: string) =>
+  new Buycoins(key, secret)

@@ -8,7 +8,7 @@ export type EstimatedNetworkFeeFields = Partial<
 
 export type EstimatedNetworkFeeResponse = GraphQlResponse & {
   data: {
-    estimatedNetworkFee: Partial<EstimatedFee>
+    estimatedNetworkFee: EstimatedFee
   }
 }
 
