@@ -297,6 +297,9 @@ These methods may be used to set or filter some queries or mutations by a specif
 - `.ethereum()`
 - `.nairaToken()`
 
+## Contributing
+We would love to have you contribute and make this project better. You can contribute by providing documentation, feedback, code changes or implementing new features and improvements. Please read the [contributing guide](CONTRIBUTING.md) to get started.
+
 [github-actions-image]: https://img.shields.io/github/workflow/status/bahdcoder/buycoins-sdk/Tests%20&%20code%20coverage?style=for-the-badge
 [github-actions-url]: https://github.com/bahdcoder/buycoins-sdk/actions "github-actions"
 

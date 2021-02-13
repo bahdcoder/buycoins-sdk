@@ -8,7 +8,7 @@
     "commit": "npx git-cz"
   },
   "name": "@buycoins/sdk",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Sdk for the buycoins GraphQL API",
   "main": "build/index.js",
   "keywords": [
