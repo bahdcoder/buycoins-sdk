@@ -28,5 +28,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["jest.config.ts", "node_modules/", "src/tests"]
+  "exclude": ["jest.config.ts", "node_modules/", "src/tests", "build/"]
 }
